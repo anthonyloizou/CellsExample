@@ -3,18 +3,20 @@ cells_1 = [1, 0, 0, 0, 0, 1, 0, 0]
 
 cells_2 = [1, 1, 1, 0, 1, 1, 1, 1]
 
-new_cells = [0, 0, 0, 0, 0, 0, 0, 0]
 
 def get_new_cells_multiple_days(cells, num_of_days):
 
-    for i in range(num_of_days):
-        cells = get_new_cells_one_day(cells)
-
-    return cells
-
+    if num_of_days == 0:
+        return cells
+    else:
+        new_cells = get_new_cells_one_day(cells)
+        new_cells_2 = get_new_cells_multiple_days(new_cells, num_of_days-1)
+        return new_cells_2
 
 
 def get_new_cells_one_day(cells):
+
+    new_cells = [0, 0, 0, 0, 0, 0, 0, 0]
 
     for i in range(len(cells)):
 
@@ -36,11 +38,11 @@ def get_new_cells_one_day(cells):
 
     return new_cells
 
-new_cells_one_day = get_new_cells_one_day(cells_1)
 
-print(new_cells_one_day)
+new_cells_one_day_1 = get_new_cells_multiple_days(cells_1, 1)
 
-new_cells_multiple_days = get_new_cells_multiple_days(cells_2, 2)
+new_cells_one_day_2 = get_new_cells_multiple_days(cells_2, 2)
 
-print(new_cells_multiple_days)
+print(new_cells_one_day_1)
 
+print(new_cells_one_day_2)
